@@ -1,0 +1,23 @@
+services:
+  samba:
+    image: dperson/samba
+    container_name: samba-server
+    env_file:
+      - .env
+    restart: unless-stopped
+    ports:
+      - "139:139"
+      - "445:445"
+    volumes:
+      - /data/backups/google-takeout:/zips
+      - /data/backups:/backups
+      - /data/media:/media
+    environment:
+      TZ: "UTC"
+    command: >
+      -u "justin;${SAMBA_PASSWORD}"
+      -s "zips;/zips;no;no;yes;justin"
+      -s "backups;/backups;no;no;yes;justin"
+      -s "media;/media;no;no;yes;justin"
+
+    # Path: /zips, Read‑only: no, Browseable: no, Guest access: no, Allowed users: justin

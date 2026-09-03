@@ -1,0 +1,31 @@
+services:
+  autopulse:
+    image: ghcr.io/dan-online/autopulse:latest
+    container_name: autopulse
+    restart: unless-stopped
+    ports:
+      - 2875:2875
+    volumes:
+      # Media stays read-only
+      - ${MEDIA_PATH}:/media:ro
+
+      # Config stays in your Git repo
+      - ./config.yaml:/app/config.yaml
+
+      # Runtime data moves OUTSIDE the repo
+      - ${DATA_PATH}:/app/data
+
+    environment:
+      - AUTOPULSE__APP__DATABASE_URL=sqlite://data/autopulse.db
+      - TZ=America/New_York
+
+    networks:
+      - immich
+
+    # this file will contain the JELLYFIN_API_KEY variable, which is used in config.yaml
+    env_file:
+      - .env
+
+networks:
+  immich:
+    external: true

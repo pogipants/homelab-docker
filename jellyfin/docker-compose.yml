@@ -1,0 +1,26 @@
+services:
+  jellyfin:
+    image: jellyfin/jellyfin
+    container_name: jellyfin
+    # Optional - specify the uid and gid you would like Jellyfin to use instead of root
+    env_file:
+      - .env
+    user: 1000:1000
+    volumes:
+      - ${DATA_PATH}/config:/config
+      - ${DATA_PATH}/cache:/cache
+      - type: bind
+        source: ${MEDIA_PATH}
+        target: /media
+    restart: 'unless-stopped'
+    #network_mode:
+    ports:
+      - 8096:8096/tcp
+      - 7359:7359/udp
+    networks:
+      - immich
+    
+
+networks:
+  immich:
+    external: true

@@ -1,0 +1,34 @@
+# Unified Compose graph for this homelab.
+#
+# Preferred for day-to-day ops: ./deploy.sh
+# That starts each stack as its own project so existing volume names
+# (especially Immich) stay stable.
+#
+# This file is for `docker compose up -d` from the repo root, or
+# `docker compose up -d jellyfin` to bounce one service.
+#
+# Networks `immich` and `proxy` are declared external in the child
+# files; deploy.sh creates them if they are missing.
+#
+# Plex is omitted: it uses host networking and an optional claim token.
+# Start it from plex/ when you want it.
+
+name: homelab
+
+include:
+  - path: immich/docker-compose.yml
+    project_directory: immich
+    env_file: immich/.env
+  - path: jellyfin/docker-compose.yml
+    project_directory: jellyfin
+  - path: nginx/docker-compose.yml
+    project_directory: nginx
+  - path: wordpress/docker-compose.yml
+    project_directory: wordpress
+    env_file: wordpress/.env
+  - path: samba/docker-compose.yml
+    project_directory: samba
+  - path: autopulse/docker-compose.yml
+    project_directory: autopulse
+  - path: pihole/docker-compose.yml
+    project_directory: pihole
