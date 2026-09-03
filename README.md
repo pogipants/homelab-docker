@@ -63,6 +63,7 @@ Network file sharing service for Windows, Mac, and Linux clients.
 - Sufficient disk space for media libraries
 - Network connectivity between services
 - Environment files (`.env`) configured for each service that requires it
+  - if a docker-compose or config.yaml has an entry like ${ADMIN_PASSWORD}, you need a `.env` file. 
 
 ## 🚀 Quick Start
 
@@ -79,16 +80,24 @@ Network file sharing service for Windows, Mac, and Linux clients.
 
 3. **Create Docker network** (for services that use the immich network)
    ```bash
-   docker network create immich
+   docker network create homelab
    ```
 
 4. **Start services**
-   ```bash
-   # Start a specific service
-   cd <service-name>
-   docker-compose up -d
 
-   # Or start from root and launch individual services
+   Commands:
+   up [stack]       Start all stacks (default), or one stack
+   down [stack]     Stop all stacks, or one stack
+   pull [stack]     Pull newer images
+   restart [stack]  Restart
+   ps               Show containers for every stack
+   logs [stack]     Tail logs (follow)
+
+
+   ```bash
+   ./deploy up
+
+   ./deploy up nginx
    ```
 
 5. **Access services**
@@ -110,6 +119,7 @@ homelab-docker/
 │   ├── docker-compose.yml
 │   ├── nginx.conf
 │   └── certs/          # SSL certificates (not in repo)
+│   ├── sites/          # Sites for all the apps. You can rename the *.conf whatever you want, but each directive in there must match your DNS name
 ├── plex/                # Alternative media server
 │   └── docker-compose.yml
 ├── samba/               # Network file sharing
@@ -122,15 +132,15 @@ homelab-docker/
 
 ### Storage Paths
 The configuration uses several persistent storage locations:
-- `/data/immich/` - Immich uploads and data
-- `/data/jellyfin/` - Jellyfin configuration and cache
+- `/apps/runtime/immich/` - Immich uploads and data
+- `/apps/runtime/jellyfin/` - Jellyfin configuration and cache
 - `/mnt/bigshare/` - Media library and shared storage
 - `./config/` - Service-specific configuration (relative to service directory)
 
 ### Networking
-- **immich network**: Used by Immich, Nginx, and related services
+- **homelab network**: Used by Immich, Nginx, and related services
 - **proxy network**: Used by WordPress and its database
-- **host network**: Used by Plex service
+- **host network**: Plex uses this, but I using Jellyfin so i should remove this.
 
 ### Environment Variables
 Critical environment variables needed:
@@ -157,8 +167,9 @@ Critical environment variables needed:
 - Virtual host configuration supports multiple domains
 
 ### Samba
-- Users `justin` and `krissy` are configured
-- `/zips` directory shares Immich exports for easy download
+- User `justin` are configured; you can add more
+- `/zips` is where i'd upload Google Takeout exports to use iwth Immich
+  - you can add more shares as needed
 - Read-only and read-write shares can be configured per user
 
 ## 🔒 Security Notes
@@ -179,7 +190,7 @@ Critical environment variables needed:
 
 **Plex not starting**: Set the `PLEX_CLAIM` token from https://www.plex.tv/claim
 
-**Nginx routing issues**: Verify `nginx.conf` is properly configured for each backend service
+**Nginx routing issues**: Verify `nginx.conf` and the *.conf files in the sites directory are properly configured for each backend service
 
 ## 📚 Additional Resources
 

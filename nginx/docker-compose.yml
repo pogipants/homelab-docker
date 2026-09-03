@@ -11,8 +11,8 @@ services:
       - ./sites:/etc/nginx/sites-enabled:ro
     restart: unless-stopped
     networks:
-      - immich
+      - homelab
 
 networks:
-  immich:
+  homelab:
     external: true
