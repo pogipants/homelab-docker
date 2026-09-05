@@ -21,7 +21,7 @@ services:
     volumes:
       - wordpress:/var/www/html
     networks:
-      - proxy
+      - wordpress_net
 
   db:
     container_name: wordpress-mysql
@@ -29,13 +29,13 @@ services:
     restart: always
     environment:
       MYSQL_DATABASE: wpdb
-      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_USER: ${MYSQL_USER}`
       MYSQL_PASSWORD: ${MYSQL_WP_PASS}
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASS}
     volumes:
       - db:/var/lib/mysql
     networks:
-      - proxy
+      - wordpress_net
 
 volumes:
   wordpress:
@@ -44,5 +44,5 @@ volumes:
     name: wordpress_db_data
 
 networks:
-  proxy:
+  wordpress_net:
     external: true

@@ -38,7 +38,7 @@ services:
 #   healthcheck:
 #     disable: false
     networks:
-      - homelab
+      - immich_net
 
 
   immich-machine-learning:
@@ -57,7 +57,7 @@ services:
     healthcheck:
       disable: false
     networks:
-      - homelab
+      - immich_net
 
   redis:
     container_name: immich-redis
@@ -66,7 +66,7 @@ services:
       test: redis-cli ping || exit 1
     restart: always
     networks:
-      - homelab
+      - immich_net
 
   database:
     container_name: immich-postgres
@@ -99,12 +99,12 @@ services:
       -c wal_compression=on
     restart: always
     networks:
-      - homelab
+      - immich_net
 
 volumes:
   model-cache:
     name: immich_model-cache
 
 networks:
-  homelab:
+  immich_net:
     external: true

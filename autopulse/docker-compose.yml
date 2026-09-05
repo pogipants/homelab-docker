@@ -20,12 +20,12 @@ services:
       - TZ=America/New_York
 
     networks:
-      - homelab
+      - jellyfin_net
 
     # this file will contain the JELLYFIN_API_KEY variable, which is used in config.yaml
     env_file:
       - .env
 
 networks:
-  homelab:
+  jellyfin_net:
     external: true

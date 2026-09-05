@@ -56,9 +56,21 @@ Network file sharing service for Windows, Mac, and Linux clients.
 - **Share**: `/zips` from immich exports
 - **Users**: justin, krissy
 
+### WireGuard
+We need to generate a hash for it first, something super secret. 
+
+```bash
+docker run --rm -it ghcr.io/wg-easy/wg-easy wgpw '<PASSWORD>'
+```
+
 ## 📋 Prerequisites
 
 - Docker and Docker Compose installed
+```bash
+   curl -sSL https://get.docker.com | sh
+   sudo usermod -aG docker $USER
+   logout
+```
 - Linux or Windows with Docker Desktop/WSL2
 - Sufficient disk space for media libraries
 - Network connectivity between services
@@ -138,8 +150,9 @@ The configuration uses several persistent storage locations:
 - `./config/` - Service-specific configuration (relative to service directory)
 
 ### Networking
-- **homelab network**: Used by Immich, Nginx, and related services
-- **proxy network**: Used by WordPress and its database
+- **immich_net**: Used by Immich and Nginx
+- **jellyfin_net**: Used by Jellyfin, AutoPulse, and Nginx
+- **wordpress_net**: Used by WordPress and its database
 - **host network**: Plex uses this, but I using Jellyfin so i should remove this.
 
 ### Environment Variables
@@ -148,6 +161,10 @@ Critical environment variables needed:
 - `UPLOAD_LOCATION` - Path for Immich media storage
 - `MYSQL_WP_PASS` - MySQL password for WordPress
 - `PLEX_CLAIM` - Plex claim token (found at https://www.plex.tv/claim)
+
+ALSO, for all locations, I try to save everything to a runtime folder
+- /apps/runtime
+or similar.
 
 ## 📝 Usage Tips
 
@@ -171,6 +188,19 @@ Critical environment variables needed:
 - `/zips` is where i'd upload Google Takeout exports to use iwth Immich
   - you can add more shares as needed
 - Read-only and read-write shares can be configured per user
+
+
+### Pihole
+- You must disable systemd-resolved
+```bash 
+   sudo systemctl disable --now systemd-resolved 
+```
+-- or to enable it back
+```bash
+   sudo systemctl enable systemd-resolv
+ed
+```
+- update the .env with storage location and password
 
 ## 🔒 Security Notes
 

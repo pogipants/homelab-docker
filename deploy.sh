@@ -6,8 +6,10 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$ROOT"
 
-STACKS=(immich jellyfin nginx wordpress samba autopulse pihole)
-NETWORKS=(immich proxy)
+# Add your favorite stacks here, remove your unfavorite stacks here too!
+STACKS=(immich jellyfin nginx samba autopulse wordpress pihole wireguard)
+# Add any networks to be precreated here.
+NETWORKS=(immich_net jellyfin_net wordpress_net pihole_net)
 
 usage() {
   cat <<EOF

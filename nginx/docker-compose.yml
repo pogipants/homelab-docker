@@ -11,8 +11,19 @@ services:
       - ./sites:/etc/nginx/sites-enabled:ro
     restart: unless-stopped
     networks:
-      - homelab
+      - immich_net
+      - jellyfin_net
+      - wordpress_net
+      - pihole_net
+
 
 networks:
-  homelab:
+  immich_net:
     external: true
+  jellyfin_net:
+    external: true
+  wordpress_net:
+    external: true
+  pihole_net:
+    external: true
+

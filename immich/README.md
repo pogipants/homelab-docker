@@ -9,7 +9,9 @@
 	sudo mv immich-go /usr/local/bin/
 	
 	
-# 2. Import Data
+# 2. Setup login and other settings in GUI.
+
+# 3. Import Data
 
 ## immich-go
 • You should see the CLI options.
@@ -21,7 +23,8 @@
 📂 Step 3: Run import from server
 
 ```bash
-immich-go -server=http://localhost:3001 \ -key=DU6vdGBZ4yXrZmOR3afyJcDNWtpyNjLbhgsFuoKZN4I \ upload /data/backup/google-taekout/*.zip 
+immich-go upload from-google-photos -s https://photos.juissy.net --skip-verify-ssl -k DU6vdGBZ4yXrZmOR3afyJcDNWtpyNjLbhgsFuoKZN4I --takeout-tag /data/backups/google-takeout/*.zip
+  
 ```
 	• -server=http://localhost:3001 → points to Immich running locally on the server.
 	• -key=YOUR_API_KEY → replace with the key you generated.

@@ -18,9 +18,9 @@ services:
       - 8096:8096/tcp
       - 7359:7359/udp
     networks:
-      - homelab
+      - jellyfin_net
     
 
 networks:
-  homelab:
+  jellyfin_net:
     external: true
