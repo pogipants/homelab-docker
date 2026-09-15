@@ -7,9 +7,9 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$ROOT"
 
 # Add your favorite stacks here, remove your unfavorite stacks here too!
-STACKS=(immich jellyfin nginx samba autopulse wordpress pihole wireguard servedash arr-stack-gluetun music-stack)
+STACKS=(immich jellyfin nginx samba autopulse wordpress pihole wireguard servedash arr-stack music-stack)
 
-mkdir -p /apps/runtime/{gluetun,radarr,sonarr,prowlarr,bazarr,recyclarr,sabnzbd,decluttarr,autopulse,bookshelf,certbot,homepage,immich,jellyfin,navidrome,pihole,subgen,tvheaded,wordpress,music-grabber,servedash}
+mkdir -p /apps/runtime/{gluetun,radarr,sonarr,prowlarr,bazarr,recyclarr,sabnzbd,decluttarr,autopulse,shelfarr,certbot,homepage,immich,jellyfin,navidrome,pihole,subgen,tvheaded,wordpress,music-grabber,servedash}
 sudo chown -R $(id -u):$(id -g) /apps/runtime/
 
 # Add any networks to be precreated here.
