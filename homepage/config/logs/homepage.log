@@ -1,0 +1,155 @@
+[2026-09-08T02:42:04.326Z] info: kubernetes.yaml was copied to the config folder
+[2026-09-08T02:52:32.612Z] info: docker.yaml was copied to the config folder
+[2026-09-08T02:52:32.613Z] info: services.yaml was copied to the config folder
+[2026-09-08T02:52:32.614Z] info: bookmarks.yaml was copied to the config folder
+[2026-09-08T02:52:32.614Z] info: proxmox.yaml was copied to the config folder
+[2026-09-08T02:52:32.621Z] info: widgets.yaml was copied to the config folder
+[2026-09-08T02:52:32.621Z] info: custom.css was copied to the config folder
+[2026-09-08T02:52:32.622Z] info: custom.js was copied to the config folder
+[2026-09-08T02:58:36.277Z] error: <configValidationHandler> Configuration validation errors [
+  {
+    reason: 'duplicated mapping key',
+    mark: {
+      name: '',
+      buffer: '---\n' +
+        '# For configuration options and examples, please see:\n' +
+        '# https://gethomepage.dev/configs/docker/\n' +
+        '\n' +
+        ' my-docker:\n' +
+        '   host: 127.0.0.1\n' +
+        '   port: 2375\n' +
+        '\n' +
+        ' my-docker:\n' +
+        '   socket: /var/run/docker.sock\n',
+      position: 148,
+      line: 8,
+      column: 1,
+      snippet: '  6 |    host: 127.0.0.1\n' +
+        '  7 |    port: 2375\n' +
+        '  8 | \n' +
+        '  9 |  my-docker:\n' +
+        '-------^\n' +
+        ' 10 |    socket: /var/run/docker.sock'
+    },
+    name: 'YAMLException',
+    message: 'duplicated mapping key (9:2)\n' +
+      '\n' +
+      '  6 |    host: 127.0.0.1\n' +
+      '  7 |    port: 2375\n' +
+      '  8 | \n' +
+      '  9 |  my-docker:\n' +
+      '-------^\n' +
+      ' 10 |    socket: /var/run/docker.sock',
+    config: 'docker.yaml'
+  }
+]
+[2026-09-08T02:58:36.302Z] error: Failed to discover services, please check docker.yaml for errors or remove example entries.
+[2026-09-08T02:58:36.303Z] error: YAMLException: duplicated mapping key (9:2)
+
+  6 |    host: 127.0.0.1
+  7 |    port: 2375
+  8 | 
+  9 |  my-docker:
+-------^
+ 10 |    socket: /var/run/docker.sock
+[2026-09-08T02:58:36.485Z] error: Failed to discover services, please check docker.yaml for errors or remove example entries.
+[2026-09-08T02:58:36.486Z] error: YAMLException: duplicated mapping key (9:2)
+
+  6 |    host: 127.0.0.1
+  7 |    port: 2375
+  8 | 
+  9 |  my-docker:
+-------^
+ 10 |    socket: /var/run/docker.sock
+[2026-09-08T02:58:37.464Z] error: <configValidationHandler> Configuration validation errors [
+  {
+    reason: 'duplicated mapping key',
+    mark: {
+      name: '',
+      buffer: '---\n' +
+        '# For configuration options and examples, please see:\n' +
+        '# https://gethomepage.dev/configs/docker/\n' +
+        '\n' +
+        ' my-docker:\n' +
+        '   host: 127.0.0.1\n' +
+        '   port: 2375\n' +
+        '\n' +
+        ' my-docker:\n' +
+        '   socket: /var/run/docker.sock\n',
+      position: 148,
+      line: 8,
+      column: 1,
+      snippet: '  6 |    host: 127.0.0.1\n' +
+        '  7 |    port: 2375\n' +
+        '  8 | \n' +
+        '  9 |  my-docker:\n' +
+        '-------^\n' +
+        ' 10 |    socket: /var/run/docker.sock'
+    },
+    name: 'YAMLException',
+    message: 'duplicated mapping key (9:2)\n' +
+      '\n' +
+      '  6 |    host: 127.0.0.1\n' +
+      '  7 |    port: 2375\n' +
+      '  8 | \n' +
+      '  9 |  my-docker:\n' +
+      '-------^\n' +
+      ' 10 |    socket: /var/run/docker.sock',
+    config: 'docker.yaml'
+  }
+]
+[2026-09-08T02:58:37.510Z] error: Failed to discover services, please check docker.yaml for errors or remove example entries.
+[2026-09-08T02:58:37.510Z] error: YAMLException: duplicated mapping key (9:2)
+
+  6 |    host: 127.0.0.1
+  7 |    port: 2375
+  8 | 
+  9 |  my-docker:
+-------^
+ 10 |    socket: /var/run/docker.sock
+[2026-09-08T02:58:44.447Z] error: <configValidationHandler> Configuration validation errors [
+  {
+    reason: 'duplicated mapping key',
+    mark: {
+      name: '',
+      buffer: '---\n' +
+        '# For configuration options and examples, please see:\n' +
+        '# https://gethomepage.dev/configs/docker/\n' +
+        '\n' +
+        ' my-docker:\n' +
+        '   host: 127.0.0.1\n' +
+        '   port: 2375\n' +
+        '\n' +
+        ' my-docker:\n' +
+        '   socket: /var/run/docker.sock\n',
+      position: 148,
+      line: 8,
+      column: 1,
+      snippet: '  6 |    host: 127.0.0.1\n' +
+        '  7 |    port: 2375\n' +
+        '  8 | \n' +
+        '  9 |  my-docker:\n' +
+        '-------^\n' +
+        ' 10 |    socket: /var/run/docker.sock'
+    },
+    name: 'YAMLException',
+    message: 'duplicated mapping key (9:2)\n' +
+      '\n' +
+      '  6 |    host: 127.0.0.1\n' +
+      '  7 |    port: 2375\n' +
+      '  8 | \n' +
+      '  9 |  my-docker:\n' +
+      '-------^\n' +
+      ' 10 |    socket: /var/run/docker.sock',
+    config: 'docker.yaml'
+  }
+]
+[2026-09-08T02:58:44.498Z] error: Failed to discover services, please check docker.yaml for errors or remove example entries.
+[2026-09-08T02:58:44.498Z] error: YAMLException: duplicated mapping key (9:2)
+
+  6 |    host: 127.0.0.1
+  7 |    port: 2375
+  8 | 
+  9 |  my-docker:
+-------^
+ 10 |    socket: /var/run/docker.sock

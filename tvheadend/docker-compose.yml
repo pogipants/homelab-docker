@@ -1,0 +1,23 @@
+services:
+  tvheadend:
+    image: lscr.io/linuxserver/tvheadend:latest
+    container_name: tvheadend
+    network_mode: host        # REQUIRED for HDHomeRun discovery
+    restart: unless-stopped
+
+    # Run as your user so recordings are accessible
+    user: 1000:1000
+
+    # Capabilities required for SSDP + multicast + tuner discovery
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+
+    volumes:
+      - /apps/runtime/tvheadend/config:/config
+      - /apps/runtime/tvheadend/recordings:/recordings
+
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/New_York

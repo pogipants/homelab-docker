@@ -1,0 +1,28 @@
+# Starts every stack via deploy.sh (creates networks, then compose up -d).
+#
+# Install:
+#   sudo ln -sfn /path/to/homelab-docker /opt/homelab-docker
+#   sudo cp systemd/homelab.service /etc/systemd/system/homelab.service
+#   sudo systemctl daemon-reload
+#   sudo systemctl enable --now homelab.service
+#
+# Use this OR compose@.service, not both, or two managers will fight
+# over the same containers.
+# Edit paths if the repo is not symlinked to /opt/homelab-docker.
+
+[Unit]
+Description=Homelab Docker Compose stacks
+Requires=docker.service
+After=docker.service network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+WorkingDirectory=/opt/homelab-docker
+ExecStart=/opt/homelab-docker/deploy.sh up
+ExecStop=/opt/homelab-docker/deploy.sh down
+TimeoutStartSec=0
+
+[Install]
+WantedBy=multi-user.target

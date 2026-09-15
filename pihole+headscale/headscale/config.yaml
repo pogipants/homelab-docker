@@ -1,0 +1,28 @@
+server_url: https://headscale.juissy.net
+listen_addr: 0.0.0.0:8080
+metrics_listen_addr: 0.0.0.0:9090
+
+database:
+  type: sqlite
+  sqlite:
+    path: /apps/runtime/headscale/db.sqlite
+
+prefixes:
+  v4: 100.64.0.0/10
+  v6: fd7a:115c:a1e0::/48
+
+derp:
+  urls:
+    - https://controlplane.tailscale.com/derpmap/default
+  auto_update_enabled: true
+  update_frequency: 24h
+
+dns:
+  magic_dns: true
+  base_domain: home.arpa
+  nameservers:
+    global:
+      - 127.0.0.1 # Instructs Headscale nodes to query Pi-hole for DNS
+
+noise:
+  private_key_path: /apps/runtime/headscale/private-noise.key

@@ -1,0 +1,38 @@
+services:
+  pihole:
+    container_name: pihole
+    image: pihole/pihole:latest
+    restart: unless-stopped
+    hostname: pasaana
+    network_mode: host
+    #ports:
+    #  # DNS Query Ports
+    #  - "53:53/tcp"
+    #  - "53:53/udp"
+    #  # Pi-hole Web Admin mapped to 8080 (avoids port 80 conflicts)
+    #  - "8080:80/tcp"
+    environment:
+      TZ: "America/New_York" # Set your local timezone
+      #WEBPASSWORD: "ChangeMe123!" # Set your Pi-hole web admin password
+      FTLCONF_dns_reply_host_force4: "true"
+      FTLCONF_dns_reply_host_IPv4: "192.168.1.2"
+      FTLCONF_dns_domain_name: "galaxy.net"
+    volumes:
+      - /apps/runtime/pihole/etc-pihole:/etc/pihole
+      - /apps/runtime/pihole/etc-dnsmasq.d:/etc/dnsmasq.d
+
+  headscale:
+    container_name: headscale
+    image: headscale/headscale:v0.29.3
+    restart: unless-stopped
+    command: serve
+    ports:
+      # Headscale Control Server Port
+      - "8085:8080/tcp"
+      # Optional Metrics Port
+      - "9090:9090/tcp"
+    volumes:
+      - /apps/runtime/headscale/config:/etc/headscale
+      - /apps/runtime/headscale/data:/var/lib/headscale
+    environment:
+      TZ: "America/New_York"

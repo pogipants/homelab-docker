@@ -1,0 +1,52 @@
+services:
+  navidrome:
+    image: deluan/navidrome:latest
+    container_name: navidrome
+    user: 1000:1000 # must own the data folder and be able to read music folder(s). See Permissions below
+    ports:
+      - "4533:4533"
+    restart: unless-stopped
+    #sssenvironment:
+      # Optional: put your config options customization here. Examples:
+      # ND_LOGLEVEL: debug
+    volumes:
+      - ${APPDATA_PATH}/navidrome:/data
+      - ${MUSIC_PATH}:/music:ro
+
+  music-grabber:
+    image: g33kphr33k/musicgrabber:latest
+    container_name: music-grabber
+    restart: unless-stopped
+    # Required for Spotify playlists over 100 tracks (headless browser)
+    shm_size: '2gb'
+    ports:
+      - "38274:8080"
+    volumes:
+      - ${MUSIC_PATH}:/music
+      - ${APPDATA_PATH}/music-grabber:/data
+    environment:
+      - MUSIC_DIR=/music
+      - DB_PATH=/data/music_grabber.db
+      - ENABLE_MUSICBRAINZ=true
+      - DEFAULT_CONVERT_TO_FLAC=true
+      # Optional: Run as specific user (like *arr stack) for correct file permissions
+      - PUID=1000
+      - PGID=1000
+      # Optional: Navidrome auto-rescan
+      # - NAVIDROME_URL=http://navidrome:4533
+      # - NAVIDROME_USER=admin
+      # - NAVIDROME_PASS=yourpassword
+      # Optional: Jellyfin auto-rescan
+      # - JELLYFIN_URL=http://jellyfin:8096
+      # - JELLYFIN_API_KEY=your-jellyfin-api-key
+      # Optional: Notifications
+      # - NOTIFY_ON=playlists,bulk,errors
+      # - TELEGRAM_WEBHOOK_URL=https://api.telegram.org/bot{token}/sendMessage?chat_id={chat_id}
+      # - WEBHOOK_URL=https://your-webhook-endpoint.com/hook
+      # - SMTP_HOST=smtp.example.com
+      # - SMTP_PORT=587
+      # - SMTP_USER=user@example.com
+      # - SMTP_PASS=password
+      # - SMTP_TO=you@example.com
+      # Optional: Use a Monochrome mirror instead of the default instance
+      # - MONOCHROME_API_URL=https://api.monochrome.tf

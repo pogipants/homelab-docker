@@ -1,0 +1,13 @@
+services:
+  byparr:
+    image: ghcr.io/thephaseless/byparr:latest
+    container_name: byparr
+    restart: unless-stopped
+    # environment:
+    #   LOG_LEVEL: debug
+    build:
+      context: .
+      dockerfile: Dockerfile
+    # Uncomment below to use byparr outside of internal network
+    ports:
+      - "8191:8191"

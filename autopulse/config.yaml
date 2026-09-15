@@ -1,0 +1,33 @@
+app:
+  hostname: 0.0.0.0
+  port: 2875
+
+opts:
+  check_path: true
+
+triggers:
+  media_watch:
+    type: notify
+    backend: polling
+    paths:
+      - /media/documentaries
+      - /media/tv
+      - /media/movies
+      - /media/anime
+      - /media/kids
+      - /media/filipino
+    recursive: true
+    debounce: 10
+    excludes:
+      - "\\.partial$"
+      - "\\.!qB$"
+      - "\\.tmp$"
+      - "\\.nfo$"
+      - "Thumbs\\.db$"
+      - "\\.DS_Store$"
+
+targets:
+  jellyfin:
+    type: jellyfin
+    url:
+    token:
